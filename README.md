@@ -49,6 +49,68 @@
 
    `npm install -g react-native-cli`
 
-4. 运行应用，ios应用必须在macOS下运行
+4. React Native 路由
+
+   `yarn add react-navigation`
+
+   `yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23`
+
+   `cd ios`
+
+   `pod install`
+
+5. 运行应用，ios应用必须在macOS下运行
 
    `react-native run-ios`
+
+6. clone后环境配置(无需前面步骤)
+
+   1. 安装依赖
+
+      `yarn install`
+
+   2. 安装Cocoapods
+
+      `cd ios`先进入ios文件夹
+
+      `sudo gem install cocoapods`
+
+      `pod install`
+
+   3. 运行
+
+      `react-native run-ios`
+
+
+### 路由配置
+
+```js
+const AppNavigator = createStackNavigator(
+  {
+    Home: {
+      screen: Login,
+      navigationOptions
+    },
+    Main: {
+      screen: Main,
+      navigationOptions
+    },
+    Reg: {
+      screen: Register,
+      navigationOptions
+    },
+    ChangePWD: {
+      screen: ChangePassword,
+      navigationOptions
+    },
+    Paper: {
+      screen: Paper,
+      navigationOptions
+    },
+  },
+  {
+    initialRouteName: 'Home',
+  },
+);
+```
+
