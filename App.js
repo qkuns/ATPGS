@@ -3,7 +3,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import Login from './pages/login';
 import Main from './pages/main';
-import Second from './pages/second'
+import Register from './pages/register'
 
 // const AppNavigator = createStackNavigator({
 //   Home: {
@@ -29,7 +29,13 @@ const AppNavigator = createStackNavigator(
         gesturesEnabled: false
       }
     },
-    Sec:Second
+    Reg:{
+      screen: Register,
+      navigationOptions: {
+        header: null,
+        gesturesEnabled: false
+      }
+    }
   },
   {
     initialRouteName: 'Home',

@@ -16,20 +16,15 @@ import {
 } from 'react-native';
 
 
-class Login extends React.Component {
+class Register extends React.Component {
 
   constructor(props) {
     super(props);
-    this.loginCheck = this.loginCheck.bind(this);
-    this.SignUp = this.SignUp.bind(this);
+    this.onBackPress = this.onBackPress.bind(this);
   }
 
-  loginCheck() {
-    this.props.navigation.navigate('Test');
-  }
-
-  SignUp() {
-    this.props.navigation.navigate('Reg');
+  onBackPress(){
+    this.props.navigation.goBack();
   }
 
   render() {
@@ -38,7 +33,7 @@ class Login extends React.Component {
         <View style={styles.main}>
           {/*标题文字*/}
           <View style={styles.title}>
-            <Text style={styles.titleText}>试卷自动生成系统</Text>
+            <Text style={styles.titleText}>注册账号</Text>
           </View>
           {/*登陆框*/}
           <View style={styles.signIn}>
@@ -47,10 +42,15 @@ class Login extends React.Component {
                 style={styles.Input}
                 maxLength={18}
                 username={true}
-                placeholder="请输入账号"
+                placeholder="请输入手机号"
                 autoCapitalize={'none'}
                 textContentType={'username'}
               ></TextInput>
+              <View>
+                <TouchableOpacity>
+                  <Text style={{fontSize: 16}}>获取验证码</Text>
+                </TouchableOpacity>
+              </View>
             </View>
             <View style={styles.Pwd}>
               <TextInput
@@ -61,23 +61,26 @@ class Login extends React.Component {
                 secureTextEntry={true}
               ></TextInput>
             </View>
+            <View style={styles.User}>
+              <TextInput
+                style={styles.Input}
+                placeholder="重新输入密码"
+                textContentType={'password'}
+                autoCapitalize={'none'}
+                secureTextEntry={true}
+              ></TextInput>
+            </View>
           </View>
 
-          {/*登陆按钮*/}
-          <TouchableOpacity style={styles.btn} onPress={this.loginCheck}>
-            <Text style={{fontSize: 16}}>登陆</Text>
+          {/*注册*/}
+          <TouchableOpacity style={styles.btn}>
+            <Text style={{fontSize: 16}}>注册</Text>
           </TouchableOpacity>
 
-          {/*注册按钮*/}
-          <TouchableOpacity onPress={this.SignUp} style={styles.regist}>
-            <Text style={{fontSize: 10}}>>> 没有账号？注册一个 >></Text>
-          </TouchableOpacity>
 
-          <View style={styles.copyright}>
-            <Text style={{color: '#B0B0B0', fontSize: 10}}>
-              @Powered By: React-Native
-            </Text>
-          </View>
+          <TouchableOpacity style={styles.btn} onPress={this.onBackPress}>
+            <Text style={{fontSize: 16}}>返回</Text>
+          </TouchableOpacity>
         </View>
       </Fragment>
     );
@@ -104,7 +107,7 @@ const styles = StyleSheet.create({
   signIn: {
     backgroundColor: '#EDEDED',
     width: 300,
-    height: 100,
+    height: 150,
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: 50,
@@ -118,11 +121,15 @@ const styles = StyleSheet.create({
   },
   User: {
     flex: 1,
+    flexDirection: 'row',
     borderColor: '#D4D4D4',
-    borderBottomWidth: 1,
+    alignItems: 'center'
   },
   Pwd: {
     flex: 1,
+    borderColor: '#D4D4D4',
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
   },
   btn: {
     display: 'flex',
@@ -136,19 +143,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  regist: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  copyright: {
-    flex: 1,
-    alignItems: 'center',
-    position: 'relative',
-    marginTop: 400,
-  },
 });
 
-export default Login;
+export default Register;
