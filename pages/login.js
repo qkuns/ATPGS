@@ -15,18 +15,42 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-
 class Login extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      username: '',
+      password: ''
+    };
     this.loginCheck = this.loginCheck.bind(this);
     this.SignUp = this.SignUp.bind(this);
   }
 
+  storeData = async (key,value) => {
+    try {
+      await AsyncStorage.setItem(key, value)
+    } catch (e) {
+      // saving error
+    }
+  };
+
+  getData = async (key) => {
+    try {
+      const value = await AsyncStorage.getItem(key);
+      if(value !== null) {
+        alert(value)
+      }
+    } catch(e) {
+      // error reading value
+    }
+  };
+
   loginCheck() {
+    //登陆成功跳转
     this.props.navigation.navigate('Test');
   }
+
 
   SignUp() {
     this.props.navigation.navigate('Reg');
@@ -50,6 +74,8 @@ class Login extends React.Component {
                 placeholder="请输入账号"
                 autoCapitalize={'none'}
                 textContentType={'username'}
+                value={this.state.username}
+                onChangeText={(text) => {this.setState({username:text})}}
               ></TextInput>
             </View>
             <View style={styles.Pwd}>
@@ -59,6 +85,8 @@ class Login extends React.Component {
                 textContentType={'password'}
                 autoCapitalize={'none'}
                 secureTextEntry={true}
+                value={this.state.password}
+                onChangeText={(text) => this.setState({password:text})}
               ></TextInput>
             </View>
           </View>

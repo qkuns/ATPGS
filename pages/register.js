@@ -54,6 +54,7 @@ class Register extends React.Component {
                 placeholder="请输入手机号"
                 autoCapitalize={'none'}
                 textContentType={'username'}
+                maxLength={11}
               ></TextInput>
               <View>
                 <TouchableOpacity
