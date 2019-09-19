@@ -8,9 +8,14 @@ class Main extends React.Component {
     super(props);
     this.state = {
       rank: 0,
+      amount: 20,
     };
     this.onExitPress = this.onExitPress.bind(this);
     this.ChangePwd = this.ChangePwd.bind(this);
+    this.Start = this.Start.bind(this);
+    this.Increase = this.Increase.bind(this);
+    this.Decrease = this.Decrease.bind(this);
+    this.onChangeTab = this.onChangeTab.bind(this);
   }
 
   onExitPress(){
@@ -29,8 +34,32 @@ class Main extends React.Component {
     );
   }
 
+  Start(){
+    console.log(this.state)
+  }
+
   ChangePwd(){
     this.props.navigation.navigate('ChangePwd')
+  }
+
+  Increase(num){
+    let a = Math.min(this.state.amount + num, 30);
+    this.setState({
+      amount: a,
+    });
+  }
+
+  Decrease(num){
+    let a = Math.max(this.state.amount - num, 10);
+    this.setState({
+      amount: a,
+    });
+  }
+
+  onChangeTab(i){
+    this.setState({
+      rank: i
+    })
   }
 
   render() {
@@ -41,13 +70,24 @@ class Main extends React.Component {
             {/*卡片*/}
             <View style={styles.cardView}>
               <View style={styles.card1}>
-                <Tabs data={['小学', '初中', '高中']}></Tabs>
+                <Tabs
+                  data={['小学', '初中', '高中']}
+                  ChangeTab={this.onChangeTab}
+                  index={this.state.rank}
+                ></Tabs>
                 <View style={styles.title}>
                   <Text style={styles.normalText}>请选择题目数量（10~30）</Text>
                 </View>
                 {/*编辑题目数量*/}
-                <EditInput/>
-                <TouchableOpacity style={styles.btn}>
+                <EditInput
+                  amount = {this.state.amount}
+                  Inc = {this.Increase}
+                  Dec = {this.Decrease}
+                />
+                <TouchableOpacity
+                  style={styles.btn}
+                  onPress={this.Start}
+                >
                   <Text style={{fontSize: 16}}>开始练习！</Text>
                 </TouchableOpacity>
               </View>

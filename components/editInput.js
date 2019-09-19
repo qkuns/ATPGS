@@ -5,24 +5,21 @@ import {View, Text, TouchableOpacity, TextInput, StyleSheet} from 'react-native'
 class EditInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      amount: 20,
-    };
   }
 
-  decrease(num) {
-    let a = Math.max(this.state.amount - num, 10);
-    this.setState({
-      amount: a,
-    });
-  }
-
-  increase(num) {
-    let a = Math.min(this.state.amount + num, 30);
-    this.setState({
-      amount: a,
-    });
-  }
+  // decrease(num) {
+  //   let a = Math.max(this.state.amount - num, 10);
+  //   this.setState({
+  //     amount: a,
+  //   });
+  // }
+  //
+  // increase(num) {
+  //   let a = Math.min(this.state.amount + num, 30);
+  //   this.setState({
+  //     amount: a,
+  //   });
+  // }
 
 
   render() {
@@ -30,27 +27,27 @@ class EditInput extends React.Component {
       <View style={styles.containView}>
         <View style={styles.container}>
           <TouchableOpacity
-            onPress={this.decrease.bind(this, 5)}
+            onPress={this.props.Dec.bind(this,5)}
             style={styles.btn}
           >
             <Text>-5</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={this.decrease.bind(this, 1)}
+            onPress={this.props.Dec.bind(this,1)}
             style={styles.btn}>
             <Text>-1</Text>
           </TouchableOpacity>
           <View style={styles.amount}>
-            <Text style={styles.amountText}>{this.state.amount}</Text>
+            <Text style={styles.amountText}>{this.props.amount}</Text>
           </View>
           <TouchableOpacity
-            onPress={this.increase.bind(this, 1)}
+            onPress={this.props.Inc.bind(this,1)}
             style={styles.btn}
           >
             <Text>+1</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={this.increase.bind(this, 5)}
+            onPress={this.props.Inc.bind(this,5)}
             style={styles.btn}>
             <Text>+5</Text>
           </TouchableOpacity>

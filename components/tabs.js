@@ -4,16 +4,8 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 class Tabs extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      index: 0,
-    };
   }
 
-  onTab(i){
-    this.setState({
-      index: i
-    })
-  }
   render() {
     return (
       <View style={styles.containView}>
@@ -21,13 +13,13 @@ class Tabs extends Component {
           {
             this.props.data.map((value, index) => {
               let itemstyle = {};
-              if (this.state.index === index) {
+              if (this.props.index === index) {
                 itemstyle = styles.itemPick;
               } else {
                 itemstyle = styles.item;
               }
               return (
-                <TouchableOpacity style={itemstyle} key={index} onPress={this.onTab.bind(this, index)}>
+                <TouchableOpacity style={itemstyle} key={index} onPress={this.props.ChangeTab.bind(this, index)}>
                   <Text style={styles.itemText}>{value}</Text>
                 </TouchableOpacity>
               );
