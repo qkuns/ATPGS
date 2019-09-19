@@ -4,14 +4,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import Login from './pages/login';
 import Main from './pages/main';
 import Register from './pages/register'
-
-// const AppNavigator = createStackNavigator({
-//   Home: {
-//     screen: Login,
-//   },
-// }, {
-//   initialRouteName: 'Home',
-// });
+import ChangePwd from './pages/changePwd'
 
 const AppNavigator = createStackNavigator(
   {
@@ -31,6 +24,13 @@ const AppNavigator = createStackNavigator(
     },
     Reg:{
       screen: Register,
+      navigationOptions: {
+        header: null,
+        gesturesEnabled: false
+      }
+    },
+    ChangePwd: {
+      screen: ChangePwd,
       navigationOptions: {
         header: null,
         gesturesEnabled: false

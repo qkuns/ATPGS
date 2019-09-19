@@ -10,6 +10,7 @@ class Main extends React.Component {
       rank: 0,
     };
     this.onExitPress = this.onExitPress.bind(this);
+    this.ChangePwd = this.ChangePwd.bind(this);
   }
 
   onExitPress(){
@@ -26,6 +27,10 @@ class Main extends React.Component {
         }
       ]
     );
+  }
+
+  ChangePwd(){
+    this.props.navigation.navigate('ChangePwd')
   }
 
   render() {
@@ -52,6 +57,7 @@ class Main extends React.Component {
               <View style={styles.card2}>
                 <TouchableOpacity
                   style={styles.btn}
+                  onPress={this.ChangePwd}
                 >
                   <Text style={{fontSize: 16}}>修改密码</Text>
                 </TouchableOpacity>
