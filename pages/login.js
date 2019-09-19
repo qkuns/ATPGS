@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     display: 'flex',
-    backgroundColor: '#B3B3B3',
+    backgroundColor: '#D4D4D4',
     height: 40,
     width: 300,
     marginLeft: 'auto',

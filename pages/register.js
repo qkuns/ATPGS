@@ -47,10 +47,19 @@ class Register extends React.Component {
                 textContentType={'username'}
               ></TextInput>
               <View>
-                <TouchableOpacity>
-                  <Text style={{fontSize: 16}}>获取验证码</Text>
+                <TouchableOpacity style={styles.getCode}>
+                  <Text style={{lineHeight:30}}>获取验证码</Text>
                 </TouchableOpacity>
               </View>
+            </View>
+            <View style={{...styles.User,borderTopWidth: 1}}>
+              <TextInput
+                style={styles.Input}
+                placeholder="请输入验证码"
+                autoCapitalize={'none'}
+                secureTextEntry={true}
+                keyboardType={'numeric'}
+              ></TextInput>
             </View>
             <View style={styles.Pwd}>
               <TextInput
@@ -107,7 +116,7 @@ const styles = StyleSheet.create({
   signIn: {
     backgroundColor: '#EDEDED',
     width: 300,
-    height: 150,
+    height: 200,
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: 50,
@@ -133,7 +142,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     display: 'flex',
-    backgroundColor: '#B3B3B3',
+    backgroundColor: '#D4D4D4',
     height: 40,
     width: 300,
     marginLeft: 'auto',
@@ -141,6 +150,15 @@ const styles = StyleSheet.create({
     marginTop: 30,
     borderRadius: 10,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  getCode: {
+    height:33,
+    width: 100,
+    marginRight: 20,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "#D0D0E0",
     alignItems: 'center',
   },
 });
