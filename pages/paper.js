@@ -12,6 +12,7 @@ class Paper extends React.Component {
       score: 0,
       choice: 0,
       paper: [],
+      amount: 0,
     };
     this.Next = this.Next.bind(this);
     this.onChangeTab = this.onChangeTab.bind(this);
@@ -19,13 +20,15 @@ class Paper extends React.Component {
 
   componentWillMount(): void {
     this.setState({
-      paper: this.props.navigation.getParam('paper')
+      paper: this.props.navigation.getParam('paper'),
+      amount: this.props.navigation.getParam('amount')
     })
   }
 
   Next() {
     //是否得分？
-    const {choice, indexNow, score, paper} = this.state;
+    const {choice, indexNow, score, paper, amount} = this.state;
+    console.log(indexNow);
     if (choice === paper[indexNow].answer) {
       console.log('正确');
       this.setState({
@@ -35,17 +38,17 @@ class Paper extends React.Component {
       console.log('错误');
     }
     //是否答题完毕
-    const {indexNow: now} = this.state;
-    if (now < 29) {
+    if (indexNow < amount - 1) {
       this.setState({
-        indexNow: now + 1,
+        indexNow: indexNow + 1,
         choice: 0,
       });
     } else {
-
+      this.props.navigation.navigate('Over',{
+        score: this.state.score,
+        amount: amount
+      })
     }
-
-    console.log(this.state.score)
   }
 
   onChangeTab(i) {
@@ -58,7 +61,6 @@ class Paper extends React.Component {
   render() {
 
     const rank = this.props.navigation.getParam('rank');
-    const amount = this.props.navigation.getParam('amount');
     const {indexNow, paper} = this.state;
     const dif = ['小学', '初中', '高中'];
 
@@ -66,7 +68,7 @@ class Paper extends React.Component {
       <View style={styles.container}>
         <View style={styles.containView}>
           <View style={styles.title}>
-            <Text style={styles.titleText}>开始练习，共{amount}题</Text>
+            <Text style={styles.titleText}>开始练习，共{this.state.amount}题</Text>
           </View>
           <View style={styles.title}>
             <Text style={styles.titleText}>难度：{dif[rank]}</Text>

@@ -6,6 +6,7 @@ import Main from './pages/main';
 import Register from './pages/register'
 import ChangePwd from './pages/changePwd'
 import Paper from './pages/paper'
+import Over from './pages/over'
 
 const AppNavigator = createStackNavigator(
   {
@@ -16,7 +17,7 @@ const AppNavigator = createStackNavigator(
         gesturesEnabled: false
       }
     },
-    Test:{
+    Main:{
       screen: Main,
       navigationOptions: {
         header: null,
@@ -39,6 +40,13 @@ const AppNavigator = createStackNavigator(
     },
     Paper: {
       screen: Paper,
+      navigationOptions: {
+        header: null,
+        gesturesEnabled: false,
+      }
+    },
+    Over: {
+      screen: Over,
       navigationOptions: {
         header: null,
         gesturesEnabled: false,

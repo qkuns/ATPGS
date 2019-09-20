@@ -14,7 +14,7 @@ class Question extends React.Component{
         <View style={styles.StateView}>
           <View style={styles.Qucontain}>
             <View style={styles.title}>
-              <Text style={styles.titleText}>题目{this.props.No}:</Text>
+              <Text style={styles.titleText}>题目{this.props.No+1}:</Text>
             </View>
             <View style={styles.question}>
               <Text style={styles.questionText}>

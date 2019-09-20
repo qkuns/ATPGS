@@ -48,7 +48,7 @@ class Login extends React.Component {
 
   loginCheck() {
     //登陆成功跳转
-    this.props.navigation.navigate('Test');
+    this.props.navigation.navigate('Main');
   }
 
 
