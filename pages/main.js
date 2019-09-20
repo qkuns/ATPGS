@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import Tabs from '../components/tabs';
 import EditInput from '../components/editInput';
+import Card from '../components/card'
 
 class Main extends React.Component {
   constructor(props) {
@@ -35,7 +36,10 @@ class Main extends React.Component {
   }
 
   Start(){
-    console.log(this.state)
+    this.props.navigation.navigate('Paper', {
+      rank: this.state.rank,
+      amount: this.state.amount
+    });
   }
 
   ChangePwd(){
@@ -68,46 +72,56 @@ class Main extends React.Component {
         <View style={styles.containView}>
           <View style={styles.container}>
             {/*卡片*/}
-            <View style={styles.cardView}>
-              <View style={styles.card1}>
-                <Tabs
-                  data={['小学', '初中', '高中']}
-                  ChangeTab={this.onChangeTab}
-                  index={this.state.rank}
-                ></Tabs>
-                <View style={styles.title}>
-                  <Text style={styles.normalText}>请选择题目数量（10~30）</Text>
+            <Card
+              height={250}
+              width={300}
+              Child={
+                <View>
+                  <Tabs
+                    data={['小学', '初中', '高中']}
+                    ChangeTab={this.onChangeTab}
+                    index={this.state.rank}
+                  ></Tabs>
+                  <View style={styles.title}>
+                    <Text style={styles.normalText}>请选择题目数量（10~30）</Text>
+                  </View>
+                  {/*编辑题目数量*/}
+                  <EditInput
+                    amount = {this.state.amount}
+                    Inc = {this.Increase}
+                    Dec = {this.Decrease}
+                  />
+                  <TouchableOpacity
+                    style={styles.btn}
+                    onPress={this.Start}
+                  >
+                    <Text style={{fontSize: 16}}>开始练习！</Text>
+                  </TouchableOpacity>
                 </View>
-                {/*编辑题目数量*/}
-                <EditInput
-                  amount = {this.state.amount}
-                  Inc = {this.Increase}
-                  Dec = {this.Decrease}
-                />
-                <TouchableOpacity
-                  style={styles.btn}
-                  onPress={this.Start}
-                >
-                  <Text style={{fontSize: 16}}>开始练习！</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+              }
+            />
             {/*卡片*/}
-            <View style={styles.cardView}>
-              <View style={styles.card2}>
-                <TouchableOpacity
-                  style={styles.btn}
-                  onPress={this.ChangePwd}
-                >
-                  <Text style={{fontSize: 16}}>修改密码</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.btn}
-                  onPress={this.onExitPress}>
-                  <Text style={{fontSize: 16}}>退出登录</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+            <Card
+              height={145}
+              width={300}
+              Child={
+                <View>
+                  <TouchableOpacity
+                    style={styles.btn}
+                    onPress={this.ChangePwd}
+                  >
+                    <Text style={{fontSize: 16}}>修改密码</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.btn}
+                    onPress={this.onExitPress}>
+                    <Text style={{fontSize: 16}}>退出登录</Text>
+                  </TouchableOpacity>
+                </View>
+              }
+            />
+
+
           </View>
         </View>
       </View>
@@ -142,29 +156,7 @@ const styles = StyleSheet.create({
     color: '#666',
     fontSize: 18,
   },
-  cardView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  card1: {
-    width: 300,
-    height: 250,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#EEE'
-  },
-  card2: {
-    width: 300,
-    height: 145,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#EEE'
-  },
   btn: {
-    display: 'flex',
     height: 40,
     width: 200,
     marginLeft: 'auto',
