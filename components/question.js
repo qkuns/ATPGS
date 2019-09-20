@@ -14,11 +14,11 @@ class Question extends React.Component{
         <View style={styles.StateView}>
           <View style={styles.Qucontain}>
             <View style={styles.title}>
-              <Text style={styles.titleText}>题目1:</Text>
+              <Text style={styles.titleText}>题目{this.props.No}:</Text>
             </View>
             <View style={styles.question}>
               <Text style={styles.questionText}>
-                题目内容啊啊啊啊付扩哈过所多或军发军或所多发军所是的风景嘎较好的三个房间哈斯大V发
+                {this.props.statement}
               </Text>
             </View>
           </View>

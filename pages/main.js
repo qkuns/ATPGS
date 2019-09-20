@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import Tabs from '../components/tabs';
 import EditInput from '../components/editInput';
 import Card from '../components/card'
+import {generatePaper} from '../common/Generator';
 
 class Main extends React.Component {
   constructor(props) {
@@ -38,7 +39,8 @@ class Main extends React.Component {
   Start(){
     this.props.navigation.navigate('Paper', {
       rank: this.state.rank,
-      amount: this.state.amount
+      amount: this.state.amount,
+      paper: generatePaper(this.state.amount, this.state.rank)
     });
   }
 

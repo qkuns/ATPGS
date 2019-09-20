@@ -10,30 +10,48 @@ class Paper extends React.Component {
     this.state = {
       indexNow: 0,
       score: 0,
-      choice: 0
+      choice: 0,
+      paper: [],
     };
     this.Next = this.Next.bind(this);
     this.onChangeTab = this.onChangeTab.bind(this);
   }
 
-  Next(){
-    //是否得分？
+  componentWillMount(): void {
+    this.setState({
+      paper: this.props.navigation.getParam('paper')
+    })
+  }
 
-    //是否答题完毕
-    const {indexNow:now} = this.state;
-    if(now < 29){
+  Next() {
+    //是否得分？
+    const {choice, indexNow, score, paper} = this.state;
+    if (choice === paper[indexNow].answer) {
+      console.log('正确');
       this.setState({
-        indexNow: now+1
-      })
+        score: score + 1,
+      });
+    } else {
+      console.log('错误');
+    }
+    //是否答题完毕
+    const {indexNow: now} = this.state;
+    if (now < 29) {
+      this.setState({
+        indexNow: now + 1,
+        choice: 0,
+      });
     } else {
 
     }
+
+    console.log(this.state.score)
   }
 
-  onChangeTab(i){
+  onChangeTab(i) {
     this.setState({
-      choice: i
-    })
+      choice: i,
+    });
   }
 
 
@@ -41,9 +59,8 @@ class Paper extends React.Component {
 
     const rank = this.props.navigation.getParam('rank');
     const amount = this.props.navigation.getParam('amount');
-    const dif = ['小学','初中','高中'];
-    console.log(rank);
-    console.log(amount);
+    const {indexNow, paper} = this.state;
+    const dif = ['小学', '初中', '高中'];
 
     return (
       <View style={styles.container}>
@@ -62,6 +79,8 @@ class Paper extends React.Component {
                 <Question
                   index={this.state.choice}
                   ChangeTab={this.onChangeTab}
+                  No={this.state.indexNow}
+                  statement={paper[indexNow].statement}
                 />
                 <TouchableOpacity
                   style={styles.btn}
@@ -86,7 +105,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   containView: {
-    height: 600
+    height: 600,
   },
   btn: {
     height: 40,
