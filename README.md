@@ -51,13 +51,13 @@
 
 4. React Native 路由
 
-   `yarn add react-navigation`
+   1. `yarn add react-navigation`
 
-   `yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23`
+   2. `yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23`
 
-   `cd ios`
+   3. `cd ios`
 
-   `pod install`
+   4. `pod install`
 
 5. 运行应用，ios应用必须在macOS下运行
 
@@ -89,32 +89,71 @@
 ### 路由配置
 
 ```js
+//移除所有header，禁用了所有手势
 const AppNavigator = createStackNavigator(
   {
-    Home: {
+    Home:{
       screen: Login,
-      navigationOptions
+      navigationOptions: {
+        header: null,
+        gesturesEnabled: false
+      }
     },
-    Main: {
+    Main:{
       screen: Main,
-      navigationOptions
+      navigationOptions: {
+        header: null,
+        gesturesEnabled: false
+      }
     },
-    Reg: {
+    Reg:{
       screen: Register,
-      navigationOptions
+      navigationOptions: {
+        header: null,
+        gesturesEnabled: false
+      }
     },
-    ChangePWD: {
-      screen: ChangePassword,
-      navigationOptions
+    ChangePwd: {
+      screen: ChangePwd,
+      navigationOptions: {
+        header: null,
+        gesturesEnabled: false
+      }
     },
     Paper: {
       screen: Paper,
-      navigationOptions
+      navigationOptions: {
+        header: null,
+        gesturesEnabled: false,
+      }
     },
+    Over: {
+      screen: Over,
+      navigationOptions: {
+        header: null,
+        gesturesEnabled: false,
+      }
+    }
   },
   {
     initialRouteName: 'Home',
   },
 );
+
+const AppContainer = createAppContainer(AppNavigator);
+
+export default class App extends Component {
+  render() {
+    return <AppContainer />
+  };
+}
 ```
+
+### 组件通信
+
+![组件通信](./static/components_communication.png)
+
+### 页面逻辑
+
+![](./static/pages_logic.png)
 
