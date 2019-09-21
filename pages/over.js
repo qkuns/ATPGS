@@ -15,6 +15,11 @@ class Paper extends React.Component {
   }
 
   render() {
+
+    const score = this.props.navigation.getParam('score');
+    const amount = this.props.navigation.getParam('amount');
+    const rate = Math.floor((score/amount)*100).toString()+"%";
+
     return (
       <View style={styles.container}>
         <View style={styles.containView}>
@@ -22,10 +27,24 @@ class Paper extends React.Component {
             <Text style={styles.titleText}>答题结束</Text>
           </View>
           <Card
-            height={300}
+            height={250}
             width={300}
             Child={
               <View>
+                <View style={styles.title}>
+                  <Text style={styles.titleText}>答题分析</Text>
+                </View>
+                <View style={styles.analyzeView}>
+                  <Text style={styles.analyzeText}>
+                    总答题数：{amount}
+                  </Text>
+                  <Text style={styles.analyzeText}>
+                    正确题数：{score}
+                  </Text>
+                  <Text style={styles.analyzeText}>
+                    正确率：{rate}
+                  </Text>
+                </View>
                 <TouchableOpacity
                   style={styles.btn}
                   onPress={this.BackMain}
@@ -70,9 +89,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   titleText: {
-    color: '#666',
+    color: '#556677',
     fontSize: 20,
   },
+  analyzeView: {
+    marginTop: 20,
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  analyzeText: {
+    lineHeight: 40,
+    color: '#556677'
+  }
 });
 
 export default Paper;

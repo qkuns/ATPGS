@@ -102,8 +102,11 @@ class Login extends React.Component {
           </TouchableOpacity>
 
           <View style={styles.copyright}>
-            <Text style={{color: '#B0B0B0', fontSize: 10}}>
+            <Text style={styles.btmText}>
               @Powered By: React-Native
+            </Text>
+            <Text style={styles.btmText}>
+              @Author: Zhijie.Qin, Lingxiao.Huang
             </Text>
           </View>
         </View>
@@ -175,8 +178,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     position: 'relative',
-    marginTop: 400,
+    marginTop: 350,
   },
+  btmText: {
+    color: '#B0B0B0',
+    fontSize: 10,
+    lineHeight: 20
+  }
 });
 
 export default Login;

@@ -14,7 +14,7 @@ class Question extends React.Component{
         <View style={styles.StateView}>
           <View style={styles.Qucontain}>
             <View style={styles.title}>
-              <Text style={styles.titleText}>题目{this.props.No+1}:</Text>
+              <Text style={styles.titleText}>题目 - {this.props.No+1}:</Text>
             </View>
             <View style={styles.question}>
               <Text style={styles.questionText}>
@@ -56,15 +56,14 @@ const styles = StyleSheet.create({
   title: {
     display: 'flex',
     justifyContent: 'center',
-    marginLeft: 10,
+    marginLeft: 10
   },
   titleText: {
     color: '#666',
     fontSize: 18,
   },
   question:{
-    marginLeft:10,
-    marginRight: 10
+    marginLeft: 10,
   },
   questionText: {
     color: '#666',
