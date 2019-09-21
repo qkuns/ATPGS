@@ -29,7 +29,7 @@ class Paper extends React.Component {
     //是否得分？
     const {choice, indexNow, score, paper, amount} = this.state;
     console.log(indexNow);
-    if (choice === paper[indexNow].answer) {
+    if (choice === paper[indexNow].trueAnswer) {
       console.log('正确');
       this.setState({
         score: score + 1,
@@ -74,7 +74,7 @@ class Paper extends React.Component {
             <Text style={styles.titleText}>难度：{dif[rank]}</Text>
           </View>
           <Card
-            height={300}
+            height={350}
             width={300}
             Child={
               <View style={{flex: 1, justifyContent: 'center'}}>
@@ -82,7 +82,8 @@ class Paper extends React.Component {
                   index={this.state.choice}
                   ChangeTab={this.onChangeTab}
                   No={this.state.indexNow}
-                  statement={paper[indexNow].statement}
+                  statement={paper[indexNow].Main}
+                  Option={paper[indexNow].Option}
                 />
                 <TouchableOpacity
                   style={styles.btn}

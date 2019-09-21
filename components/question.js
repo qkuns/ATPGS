@@ -21,6 +21,12 @@ class Question extends React.Component{
                 {this.props.statement}
               </Text>
             </View>
+            <View style={styles.OptionView}>
+              <Text style={styles.OptionText}>A ： {this.props.Option.A}</Text>
+              <Text style={styles.OptionText}>B ： {this.props.Option.B}</Text>
+              <Text style={styles.OptionText}>C ： {this.props.Option.C}</Text>
+              <Text style={styles.OptionText}>D ： {this.props.Option.D}</Text>
+            </View>
           </View>
         </View>
         <Tab
@@ -38,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   StateView: {
-    height: 150,
+    height: 200,
     width: 280,
     marginLeft: 'auto',
     marginRight: 'auto'
@@ -64,6 +70,14 @@ const styles = StyleSheet.create({
     color: '#666',
     fontSize: 16,
     lineHeight: 22,
+  },
+  OptionView: {
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  OptionText: {
+    color: '#666',
+    lineHeight: 30
   }
 });
 
