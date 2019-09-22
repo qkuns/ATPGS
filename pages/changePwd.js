@@ -30,7 +30,14 @@ class ChangePwd extends React.Component {
   }
 
   ChangeCfm(){
-    let param = qs.stringify(this.state);
+    const username = this.props.navigation.getParam('username');
+    let {pwd_origin, new_pwd} = this.state;
+    let param = {
+      username: username,
+      password: pwd_origin,
+      new_password: new_pwd
+    };
+    param = qs.stringify(param);
     axios.post(
       'http://123.57.237.147/changepwd.php', param)
       .then(res => {
@@ -41,8 +48,8 @@ class ChangePwd extends React.Component {
             [{text:'确定'}],
           );
         } else if (res.data.state === 'succeed') {
-          //登陆成功跳转
-          this.props.navigation.navigate('Main',{username:this.state.username});
+          //修改成功跳转至登录
+          this.props.navigation.navigate('Home');
         }
       });
   }
