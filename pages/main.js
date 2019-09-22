@@ -30,7 +30,7 @@ class Main extends React.Component {
         },
         {
           text: "退出",
-          onPress: () => this.props.navigation.goBack()
+          onPress: () => this.props.navigation.navigate('Home')
         }
       ]
     );
@@ -45,7 +45,8 @@ class Main extends React.Component {
   }
 
   ChangePwd(){
-    this.props.navigation.navigate('ChangePwd')
+    const user = this.props.navigation.getParam('username');
+    this.props.navigation.navigate('ChangePwd',{username:user});
   }
 
   Increase(num){

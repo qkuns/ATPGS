@@ -12,14 +12,39 @@ import {
   View,
   Text,
   TextInput,
-  TouchableOpacity,
+  TouchableOpacity, Alert,
 } from 'react-native';
-
+import axios from 'axios';
+import qs from 'qs';
 
 class ChangePwd extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      pwd_origin: '',
+      new_pwd: '',
+      new_pwd_cfm: ''
+    };
+    this.ChangeCfm = this.ChangeCfm.bind(this);
+  }
+
+  ChangeCfm(){
+    let param = qs.stringify(this.state);
+    axios.post(
+      'http://123.57.237.147/changepwd.php', param)
+      .then(res => {
+        if (res.data.state === 'error') {
+          Alert.alert(
+            res.data.errMsg,
+            '',
+            [{text:'确定'}],
+          );
+        } else if (res.data.state === 'succeed') {
+          //登陆成功跳转
+          this.props.navigation.navigate('Main',{username:this.state.username});
+        }
+      });
   }
 
   render() {
@@ -40,6 +65,10 @@ class ChangePwd extends React.Component {
                 textContentType={'password'}
                 secureTextEntry={true}
                 maxLength={10}
+                value={this.state.pwd_origin}
+                onChangeText={(text) => {
+                  this.setState({pwd_origin: text});
+                }}
               ></TextInput>
             </View>
             <View style={styles.User}>
@@ -49,6 +78,10 @@ class ChangePwd extends React.Component {
                 textContentType={'password'}
                 autoCapitalize={'none'}
                 secureTextEntry={true}
+                value={this.state.new_pwd}
+                onChangeText={(text) => {
+                  this.setState({new_pwd: text});
+                }}
               ></TextInput>
             </View>
             <View style={styles.Pwd}>
@@ -58,12 +91,19 @@ class ChangePwd extends React.Component {
                 textContentType={'password'}
                 autoCapitalize={'none'}
                 secureTextEntry={true}
+                value={this.state.new_pwd_cfm}
+                onChangeText={(text) => {
+                  this.setState({new_pwd_cfm: text});
+                }}
               ></TextInput>
             </View>
           </View>
 
           {/*登陆按钮*/}
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={this.ChangeCfm}
+          >
             <Text style={{fontSize: 16}}>确认修改</Text>
           </TouchableOpacity>
         </View>

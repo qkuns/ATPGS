@@ -14,21 +14,47 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-
+import axios from 'axios';
+import qs from 'qs';
 
 class Register extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      getCodeText: '获取验证码'
+      getCodeText: '获取验证码',
+      username: '',
+      code: '',
+      password: '',
+      password2: ''
     };
     this.onBackPress = this.onBackPress.bind(this);
     this.getCode = this.getCode.bind(this);
+    this.pushRegister = this.pushRegister.bind(this);
   }
 
   onBackPress(){
     this.props.navigation.goBack();
+  }
+
+
+  pushRegister(){
+    let {username,password} = this.state;
+    let param = qs.stringify({
+      username: username,
+      password: password
+    });
+    axios.post(
+      'http://123.57.237.147/register.php',param)
+      .then(res => {
+        console.log(res);
+        if (res.data.state === 'error') {
+          alert(res.data.errMsg);
+        } else if (res.data.state === 'succeed'){
+          //登陆成功跳转
+          this.props.navigation.navigate('Main');
+        }
+      });
   }
 
   getCode(){
@@ -49,12 +75,15 @@ class Register extends React.Component {
             <View style={styles.User}>
               <TextInput
                 style={styles.Input}
-                maxLength={18}
                 username={true}
                 placeholder="请输入手机号"
                 autoCapitalize={'none'}
                 textContentType={'username'}
                 maxLength={11}
+                onChangeText={(text) => {
+                  this.setState({username: text});
+                }}
+                value={this.state.username}
               ></TextInput>
               <View>
                 <TouchableOpacity
@@ -72,6 +101,10 @@ class Register extends React.Component {
                 autoCapitalize={'none'}
                 keyboardType={'numeric'}
                 maxLength={6}
+                onChangeText={(text) => {
+                  this.setState({code: text});
+                }}
+                value={this.state.code}
               ></TextInput>
             </View>
             <View style={styles.Pwd}>
@@ -81,6 +114,10 @@ class Register extends React.Component {
                 textContentType={'password'}
                 autoCapitalize={'none'}
                 secureTextEntry={true}
+                onChangeText={(text) => {
+                  this.setState({password: text});
+                }}
+                value={this.state.password}
               ></TextInput>
             </View>
             <View style={styles.User}>
@@ -90,12 +127,19 @@ class Register extends React.Component {
                 textContentType={'password'}
                 autoCapitalize={'none'}
                 secureTextEntry={true}
+                onChangeText={(text) => {
+                  this.setState({password2: text});
+                }}
+                value={this.state.password2}
               ></TextInput>
             </View>
           </View>
 
           {/*注册*/}
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={this.pushRegister}
+          >
             <Text style={{fontSize: 16}}>注册</Text>
           </TouchableOpacity>
 
