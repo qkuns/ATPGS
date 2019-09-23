@@ -63,7 +63,7 @@ qkuns@qq.com（329秦）
     - [x] 选好后点击下一题相当于提交，~~没选提醒~~**改为了默认选A**
     - [x] 最后一题提交完给出分数
     - [x] 回到做题系统首页
-- 重构代码~~（以后有空的话）~~
+- 重构代码 ~~(以后有空的话)~~
   - [ ] 数据管理使用`redux`
   - [ ] 代码冗余部分
   - [ ] 题目生成部分
@@ -199,4 +199,4 @@ export default class App extends Component {
 ![](./static/pages_logic.png)
 
 ### 预览
-
+在`github`里被ignore了……
