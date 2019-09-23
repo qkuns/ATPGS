@@ -17,7 +17,8 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import qs from 'qs';
-import pwdCheck from '../common/pwdCheck';
+import {pwdCheck} from '../common/Check';
+import {userCheck} from '../common/Check';
 
 class Register extends React.Component {
 
@@ -85,6 +86,15 @@ class Register extends React.Component {
   }
 
   getCode(){
+    const {username} = this.state;
+    if(!userCheck(username)){
+      Alert.alert(
+        '手机号不合法❌',
+        '',
+        [{text:'👌'}]
+      );
+      return;
+    }
     if (this.state.getCodeText === '获取验证码'){
       this.setState({
         getCodeText: '请查收验证码'
