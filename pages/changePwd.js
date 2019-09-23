@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import qs from 'qs';
+import {pwdCheck} from '../common/Check';
 
 class ChangePwd extends React.Component {
 
@@ -31,7 +32,23 @@ class ChangePwd extends React.Component {
 
   ChangeCfm(){
     const username = this.props.navigation.getParam('username');
-    let {pwd_origin, new_pwd} = this.state;
+    let {pwd_origin, new_pwd, new_pwd_cfm} = this.state;
+    if (new_pwd !== new_pwd_cfm){
+      Alert.alert(
+        '两次密码输入不同❌',
+        '😕',
+        [{text:'👌'}]
+      );
+      return;
+    }
+    if (!pwdCheck(new_pwd)){
+      Alert.alert(
+        '密码不合法❌',
+        '要有大小写字母数字并且长度为6-10.不能有特殊符号\n😕',
+        [{text:'👌'}]
+      );
+      return;
+    }
     let param = {
       username: username,
       password: pwd_origin,

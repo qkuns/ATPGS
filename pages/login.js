@@ -1,9 +1,9 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * appName: ATPGS
+ * platform: iOS
+ * https://github.com/qkuns/ATPGS
  *
- * @format
- * @flow
+ * @author: Zhijie.Qin
  */
 
 import React, {Fragment} from 'react';
