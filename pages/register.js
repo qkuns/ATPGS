@@ -13,6 +13,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import axios from 'axios';
 import qs from 'qs';
@@ -39,10 +40,11 @@ class Register extends React.Component {
 
 
   pushRegister(){
-    let {username,password} = this.state;
+    let {username,password,code} = this.state;
     let param = qs.stringify({
       username: username,
-      password: password
+      password: password,
+      code: code
     });
     axios.post(
       'http://123.57.237.147/register.php',param)
@@ -58,9 +60,26 @@ class Register extends React.Component {
   }
 
   getCode(){
-    this.setState({
-      getCodeText: '请查收验证码'
-    })
+    if (this.state.getCodeText === '获取验证码'){
+      this.setState({
+        getCodeText: '请查收验证码'
+      });
+
+      axios.post(
+        'http://123.57.237.147/MsgCode.php',qs.stringify({
+          username: this.state.username
+        }))
+        .then(res => {
+          console.log(res);
+        });
+    } else {
+      Alert.alert(
+        '别着急',
+        '',
+        [{text:'我再等等'}]
+      )
+    }
+
   }
   render() {
     return (

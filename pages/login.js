@@ -42,6 +42,9 @@ class Login extends React.Component {
           );
         } else if (res.data.state === 'succeed') {
           //登陆成功跳转
+          this.setState({
+            password: ''
+          });
           this.props.navigation.navigate('Main',{username:this.state.username});
         }
       });
