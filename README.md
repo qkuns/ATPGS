@@ -72,6 +72,8 @@ qkuns@qq.com（329秦）
 
 ### 开发环境依赖
 
+前排提醒**下载很慢**需要**科学上网**，最终工程文件900Mb……
+
 1. Node
 
    `brew install node`
