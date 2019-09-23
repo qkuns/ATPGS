@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import qs from 'qs';
+import pwdCheck from '../common/pwdCheck';
 
 class Register extends React.Component {
 
@@ -40,7 +41,31 @@ class Register extends React.Component {
 
 
   pushRegister(){
-    let {username,password,code} = this.state;
+    let {username,password,password2,code} = this.state;
+    if(code === ''){
+      Alert.alert(
+        '验证码为空❌',
+        '😕',
+        [{text:'👌'}]
+      );
+      return;
+    }
+    if (password !== password2){
+      Alert.alert(
+        '两次密码输入不同❌',
+        '😕',
+        [{text:'👌'}]
+      );
+      return;
+    }
+    if (!pwdCheck(password)){
+      Alert.alert(
+        '密码不合法❌',
+        '要有大小写字母数字并且长度为6-10.不能有特殊符号\n😕',
+        [{text:'👌'}]
+      );
+      return;
+    }
     let param = qs.stringify({
       username: username,
       password: password,
@@ -133,6 +158,7 @@ class Register extends React.Component {
                 textContentType={'password'}
                 autoCapitalize={'none'}
                 secureTextEntry={true}
+                maxLength={10}
                 onChangeText={(text) => {
                   this.setState({password: text});
                 }}
@@ -146,6 +172,7 @@ class Register extends React.Component {
                 textContentType={'password'}
                 autoCapitalize={'none'}
                 secureTextEntry={true}
+                maxLength={10}
                 onChangeText={(text) => {
                   this.setState({password2: text});
                 }}
